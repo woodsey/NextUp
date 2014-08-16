@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @item.title %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @item.notes %>
+</p>
+
+<p>
+  <strong>Sort:</strong>
+  <%= @item.sort %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @item.category %>
+</p>
+
+<p>
+  <strong>Listed in:</strong>
+  <%= @item.listed_in %>
+</p>
+
+<p>
+  <strong>Completed on:</strong>
+  <%= @item.completed_on %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

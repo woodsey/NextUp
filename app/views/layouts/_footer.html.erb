@@ -1,0 +1,16 @@
+<footer class="footer">
+  <small>
+    Completed Items: <div id="footer-completed-items"></div>
+  </small>
+  <nav>
+    <ul>
+	  <% if current_user %>
+		<li><%= 'Signed in as ' + current_user.name %></li>
+	  <% else %>
+	    <li>Not signed in</li>
+	  <% end %>
+      <li></li>
+      <li></li>
+    </ul>
+  </nav>
+</footer>

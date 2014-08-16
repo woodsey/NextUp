@@ -1,0 +1,52 @@
+<%= form_for(@item, :html => {:class => ".form-horizontal", :role=>"form"}) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+	<%= f.label :title, class: "col-sm-2 control-label" %>
+	<div class="col-sm-10">
+		<%= f.text_field :title, class:"form-control" %>
+	</div>
+  </div>
+  <div class="form-group">
+	<%= f.label :notes, class: "col-sm-2 control-label" %>
+	  <div class="col-sm-10">
+		<%= f.text_field :notes, class:"form-control" %>
+	</div>
+  </div>
+  
+  <div class="form-group">
+	  
+	  <div class="field">
+		<%= f.label :category %>
+		<%= f.text_field :category %>
+	  </div>
+	  
+	  
+	  <div class="radio">
+		<%= radio_button("item","listed_in","Now") %>
+		<%= label_tag(:listed_in,"Now") %>
+		<%= radio_button("item","listed_in","Next") %>
+		<%= label_tag(:listed_in,"Next") %>
+		<%= radio_button("item","listed_in","Collect",{checked:true}) %>
+		<%= label_tag(:listed_in,"Collect") %>
+	  </div>
+	  
+	  
+		<br />
+	  
+	  <div class="actions">
+		<%= f.submit class: "btn btn-default" %>
+	  </div>
+  </div>
+  
+<% end %>

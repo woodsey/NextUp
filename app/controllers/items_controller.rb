@@ -11,8 +11,9 @@ class ItemsController < ApplicationController
 	if @list=='' || @list.nil?
 		@list="Now"	#default is to show now items
 	end
-	@items=current_user.items.where("listed_in = '"+@list+"'")
-		
+	@items=current_user.items.where(listed_in: @list, deleted: nil)
+	
+	
   end
 
   # GET /items/1
@@ -60,18 +61,33 @@ class ItemsController < ApplicationController
   def update
 	puts "--------------calling UPDATE-----------------"
 	puts params
-  
+	
     respond_to do |format|
       if @item.update(item_params)
-		@complete=params[:complete]
+		@complete=params[:item][:complete]
+		@move_to=params[:item][:listed_in]
+		@action=params[:action]
+
+		puts @complete
+		puts @move_to
+		puts @action
 		
-		if @complete!='' || !@complete.nil?
+		# these params are not actually working... how do you parse params from the data????
+		
+		if !@complete==''
+			puts "------------DOESNT EQUAL BLANK"
+		end
+		if !@complete.nil?
+			puts "-------------NOT NIL....."
+		end
+		
+		if !@complete=='' || !@complete.nil?
 			puts "------------ITEM MARKED AS COMPLETE--------------"
 			@item.completed_on=DateTime.now
-			@item.listed_in="Archive"
+		#	@item.listed_in="Archive"
 			@item.save
+		#	only need to call save if we make additional changes, other than the param ones
 		end		
-		
 		
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         #format.json { render json: @user }
@@ -102,6 +118,7 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:user_id, :title, :notes, :sort, :category, :listed_in, :complete, :completed_on)
+		# parameters must be listed here before they can be retrieved from the web and set - important for ajax
+      params.require(:item).permit(:user_id, :title, :notes, :sort, :category, :listed_in, :complete, :completed_on, :deleted)
     end
 end

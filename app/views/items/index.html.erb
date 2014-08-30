@@ -1,87 +1,15 @@
-<h1>Listing items</h1>
+<h1></h1>
 
 <div><%= link_to 'Add Item', new_item_path %></div>
 
 
 <br />
 
-<ul class="nav nav-tabs" role="tablist">
-  <% if @list=='Now' %>
-	<li class="active"><a href="#">Now</a></li>
-  <% else %>
-    <li><%= link_to "Now", items_path(list: "Now") %></li>
-  <% end %>
+<div id="items-menu"></div>
+
+<div id="items-table"></div>  
   
-  <% if @list=='Next' %>
-    <li class="active"><a href="#">Next</a></li>
-  <% else %>
-    <li><%= link_to "Next", items_path(list:"Next") %></li>
-  <% end %>
-
-  <% if @list=='Collect' %>
-    <li class="active"><a href="#">Collect</a></li>
-  <% else %>
-    <li><%= link_to "Collect", items_path(list:"Collect") %></li>
-  <% end %>  
-
-  <% if @list=='Ideas' %>
-    <li class="active"><a href="#">Ideas</a></li>
-  <% else %>
-    <li><%= link_to "Ideas", items_path(list:"Ideas") %></li>
-  <% end %>
-  
-  <% if @list=='Archive' %>
-    <li class="active"><a href="#">Archive</a></li>
-  <% else %>
-    <li><%= link_to "Archive", items_path(list:"Archive") %></li>
-  <% end %>
-</ul>
-
-
-  <% if @items.count<1 %>
-	<p>Nothing here yet.</p>
-  <% else %>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-			  <th>Title</th>
-			  <th>Category</th>
-			  <th>Notes</th>
-			  <th>Created</th>
-			  <th>Complete</th>
-			  <th>Move To</th>
-			  <th colspan="3"></th>
-			</tr>
-		  </thead>
-		  <tbody>
-		<% @items.each_with_index do |item,index| %>
-		  <tr id="item_row_<%= index.to_s %>">
-			<td class="item_row_title"><%= item.title %></td>
-			<td class="item_row_category"><%= item.category %></td>
-			<td class="item_row_notes"><%= item.notes %></td>
-			<td class="item_row_created"><%= time_ago_in_words(item.created_at) + " ago" %></td>
-			<td class="item_row_actions">
-				<a href="javascript:item_complete('<%= item.id %>','<%= index.to_s %>');">Done</a>
-				<span class="glyphicon glyphicon-move"></span>
-			</td>
-			<td>
-				<select id="move_to_<%= index.to_s %>" class="move_to_select">
-					<option value="Now"></option>
-					<option value="Now">Now</option>
-					<option value="Now">Next</option>
-					<option value="Now">Collect</option>
-					<option value="Now">Ideas</option>
-				</select>
-			</td>
-			<td><%= link_to 'Show', item %></td>
-			<td><%= link_to 'Edit', edit_item_path(item) %></td>
-			<td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		  </tr>
-		<% end %>
-	  </tbody>
-    </table>
-  <% end %>
-
 <p></p>
 
 <div id="error-box"></div>
+

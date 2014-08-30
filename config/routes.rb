@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 	put 'complete', on: :member
   end
   
-  root to: 'static_pages#home', as: :home
+  root to: 'items#index', as: :home
   #root 'static_pages#home', as: :home
   
   # The priority is based upon order of creation: first created -> highest priority.
